@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Bilangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Konversi Bilangan</h1>
+    <p>Masukkan Bilangan Desimal</p>
+    <input type="text" id="decimalInput" placeholder="Masukkan angka desimal">
+    <button onclick="convertNumber()">Konversi</button>
+    
+    <div id="result">
+        <p>Biner: <span id="binaryResult"></span></p>
+        <p>Oktal: <span id="octalResult"></span></p>
+        <p>Heksadesimal: <span id="hexResult"></span></p>
+    </div>
+
+    <script>
+        // Fungsi untuk validasi input
+        function isValidDecimal(input) {
+            return /^-?\d+$/.test(input);
+        }
+
+        // Fungsi konversi ke biner
+        function decimalToBinary(decimal) {
+            return (decimal >>> 0).toString(2);
+        }
+
+        // Fungsi konversi ke oktal
+        function decimalToOctal(decimal) {
+            return (decimal >>> 0).toString(8);
+        }
+
+        // Fungsi konversi ke heksadesimal
+        function decimalToHexadecimal(decimal) {
+            return (decimal >>> 0).toString(16).toUpperCase();
+        }
+
+        // Fungsi utama untuk konversi
+        function convertNumber() {
+            const input = document.getElementById('decimalInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Validasi input
+            if (!isValidDecimal(input)) {
+                alert("Masukkan Angka yang benar!");
+                resultDiv.style.display = 'none';
+                return;
+            }
+            
+            const decimal = parseInt(input);
+            
+            // Melakukan konversi
+            document.getElementById('binaryResult').textContent = decimalToBinary(decimal);
+            document.getElementById('octalResult').textContent = decimalToOctal(decimal);
+            document.getElementById('hexResult').textContent = decimalToHexadecimal(decimal);
+            
+            // Menampilkan hasil
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
